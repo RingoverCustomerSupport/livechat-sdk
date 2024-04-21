@@ -1,0 +1,19 @@
+{
+  "name": "@ringover/customer-support-sdk",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "minify": "uglifyjs sdk.js --compress --mangle --warn --output sdk.min.js",
+    "production": "npm run version:bump --silent && rm -f customer-support-sdk.min.js && npm run minifyJS --silent && npm run version:add --silent",
+    "version:add": "echo \"/*! Ringover Customer Support SDK v$(npm run version:extract --silent) Build time: $(date '+%m-%d-%Y %H:%M:%S') */\n$(cat customer-support-sdk.min.js)\" > customer-support-sdk.min.js",
+    "version:bump": "npm version patch --silent",
+    "version:extract": "cat package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]'"
+  },
+  "author": "Subhransu Dash",
+  "license": "ISC",
+  "dependencies": {
+    "uglify-js": "^3.17.4"
+  }
+}
