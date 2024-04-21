@@ -99,6 +99,4 @@ class CustomerSupportSDK {
   }
 }
 
-window.CustomerSupportSDK = CustomerSupportSDK;
-
-export default CustomerSupportSDK;
+module.exports = CustomerSupportSDK;
