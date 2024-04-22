@@ -1,3 +1,10 @@
+function log(...objects) {
+  console.log(window.origin);
+  if (window.origin.includes("localhost")) console.log(objects);
+}
+
+console.log("HELOOOOOO");
+
 class CustomerSupportSDK {
   isIframePresent = false;
   isReady = false;
@@ -27,6 +34,8 @@ class CustomerSupportSDK {
     const handleMessage = (event) => {
       if (event.origin !== IFRAME_SRC) return;
 
+      log("MESSAGE FROM IFRAME", event.data);
+
       if (event.data?.type === this.MESSAGE_TYPES.IS_READY) {
         this.isReady = true;
       } else if (event.data?.type === this.MESSAGE_TYPES.REQUESTING_USER_DATA) {
@@ -37,13 +46,13 @@ class CustomerSupportSDK {
         this.userDataSet = true;
       } else if (event.data?.type === this.MESSAGE_TYPES.IS_CHATBOX_OPEN) {
         if (event.data.data) {
-          this.iframe.width = "350px";
-          this.iframe.height = "555px";
+          this.iframe.style.width = "350px";
+          this.iframe.style.height = "555px";
           this.iframe.style.boxShadow =
             "rgba(41, 43, 88, 0.2) 5.10258px 0.2052px 51.0258px";
         } else {
-          this.iframe.width = "50px";
-          this.iframe.height = "50px";
+          this.iframe.style.width = "50px";
+          this.iframe.style.height = "50px";
           this.iframe.style.boxShadow = "none";
         }
       }
@@ -58,8 +67,8 @@ class CustomerSupportSDK {
 
   setStyles(options) {
     this.iframe.frameBorder = "0";
-    this.iframe.width = options?.width ?? "50px";
-    this.iframe.height = options?.height ?? "50px";
+    this.iframe.style.width = options?.width ?? "50px";
+    this.iframe.style.height = options?.height ?? "50px";
 
     this.iframe.style.border = "0";
     this.iframe.style.position = "fixed";
