@@ -3,8 +3,6 @@ function log(...objects) {
   if (window.origin.includes("localhost")) console.log(objects);
 }
 
-console.log("HELOOO");
-
 class CustomerSupportSDK {
   isIframePresent = false;
   isReady = false;
